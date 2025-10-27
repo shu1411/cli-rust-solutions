@@ -21,5 +21,16 @@ fn main() {
         )
         .get_matches();
 
-    println!("{:#?}", matches);
+    // extract <TEXT> argument(s)
+    // We call unwrap here because we know that the program will require at least one <TEXT>
+    // argument, hence get_many won't return a None.
+    let text: Vec<String> = matches.get_many("text").unwrap().cloned().collect();
+
+    // extract the value of the '-n' flag.
+    let omit_newline = matches.get_flag("omit_newline");
+
+    // omit newline if '-n' flag is present.
+    let ending = if omit_newline { "" } else { "\n" };
+
+    print!("{}{ending}", text.join(" "));
 }
