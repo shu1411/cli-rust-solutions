@@ -1,3 +1,4 @@
+use anyhow::Result;
 use clap::Parser;
 
 #[derive(Debug, Parser)]
@@ -5,8 +6,8 @@ use clap::Parser;
 /// Rust version of `cat`
 struct Args {
     /// Input file(s)
-    #[arg(default_values_t = ["-".to_string()])]
-    file: Vec<String>,
+    #[arg(value_name = "FILE", default_values_t = ["-".to_string()])]
+    files: Vec<String>,
 
     /// Number all output lines
     #[arg(short('n'), long("number"), conflicts_with = "number_nonblank_lines")]
@@ -18,7 +19,15 @@ struct Args {
 }
 
 fn main() {
-    let args = Args::parse();
-    println!("{args:#?}");
+    if let Err(e) = run(Args::parse()) {
+        eprintln!("{e}");
+        std::process::exit(1);
+    }
 }
 
+fn run(args: Args) -> Result<()> {
+    for filename in args.files {
+        println!("{filename}");
+    }
+    Ok(())
+}
