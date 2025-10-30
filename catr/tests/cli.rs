@@ -82,11 +82,26 @@ fn run_stdin(input_file: &str, args: &[&str], expected_file: &str) -> Result<()>
 
 // ---------------------------------------------------
 #[test]
+fn bustle_stdin() -> Result<()> {
+    run_stdin(BUSTLE, &["-"], "tests/expected/the-bustle.txt.stdin.out")
+}
+
+// ---------------------------------------------------
+#[test]
+fn bustle_stdin_n() -> Result<()> {
+    run_stdin(
+        BUSTLE,
+        &["-n", "-"],
+        "tests/expected/the-bustle.txt.n.stdin.out",
+    )
+}
+
+#[test]
 fn bustle_stdin_b() -> Result<()> {
     run_stdin(
         BUSTLE,
         &["-b", "-"],
-        "tests/expected/the-bustle.txt.b.stdint.out",
+        "tests/expected/the-bustle.txt.b.stdin.out",
     )
 }
 
