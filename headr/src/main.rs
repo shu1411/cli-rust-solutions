@@ -9,11 +9,17 @@ struct Args {
     files: Vec<String>,
 
     /// Number of lines
-    #[arg(short('n'), long("lines"), value_name = "LINES", default_value_t = 10)]
+    #[arg(
+        short('n'),
+        long("lines"),
+        value_name = "LINES",
+        default_value_t = 10,
+        conflicts_with = "bytes"
+    )]
     lines: u64,
 
     /// Number of bytes
-    #[arg(short('c'), long("bytes"), value_name = "BYTES")]
+    #[arg(short('c'), long("bytes"), value_name = "BYTES", value_parser = clap::value_parser!(u64).range(1..=u64::MAX))]
     bytes: Option<u64>,
 }
 
