@@ -1,10 +1,10 @@
 ==> ./tests/inputs/empty.txt <==
 
 ==> ./tests/inputs/one.txt <==
-o
+Ã
 ==> ./tests/inputs/two.txt <==
-o
+T
 ==> ./tests/inputs/three.txt <==
-o
+T
 ==> ./tests/inputs/twelve.txt <==
 o
